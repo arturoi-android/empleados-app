@@ -1,36 +1,67 @@
 package com.ez.sisemp.empleado.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "empleado")
 public class EmpleadoEntity {
+
     @Id
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "codigo_empleado")
-    String codigoEmpleado;
-    String nombres;
+    private String codigoEmpleado;
+    private String nombres;
     @Column(name = "apellido_pat")
-    String apellidoPat;
+    private String apellidoPat;
     @Column(name = "apellido_mat")
-    String apellidoMat;
+    private String apellidoMat;
     @Column(name = "id_departamento")
-    Integer idDepartamento;
-    String correo;
+    private Integer idDepartamento;
+    @Column(name = "correo")
+    private String correo;
     double salario;
     @Column(name = "fecha_nacimiento")
-    Date fechaNacimiento;
+    private Date fechaNacimiento;
+    @Column(name = "activo")
+    private Integer activo;
 
-    public Long getId() {
+    public EmpleadoEntity() {
+
+    }
+
+    public EmpleadoEntity(String codigoEmpleado, String nombres, String apellidoPat, String apellidoMat, Integer idDepartamento,String correo, double salario, Date fechaNacimiento) {
+        this.codigoEmpleado = codigoEmpleado;
+        this.nombres = nombres;
+        this.apellidoPat = apellidoPat;
+        this.apellidoMat = apellidoMat;
+        this.idDepartamento = idDepartamento;
+        this.correo = correo;
+        this.salario = salario;
+        this.fechaNacimiento = fechaNacimiento;
+        this.activo = 1;
+    }
+
+    public EmpleadoEntity(String codigoEmpleado, String nombres, String apellidoPat, String apellidoMat, Integer idDepartamento, String correo, double salario, Date fechaNacimiento, Integer activo) {
+        this.codigoEmpleado = codigoEmpleado;
+        this.nombres = nombres;
+        this.apellidoPat = apellidoPat;
+        this.apellidoMat = apellidoMat;
+        this.idDepartamento = idDepartamento;
+        this.correo = correo;
+        this.salario = salario;
+        this.fechaNacimiento = fechaNacimiento;
+        this.activo = activo;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -96,5 +127,13 @@ public class EmpleadoEntity {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Integer getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Integer activo) {
+        this.activo = activo;
     }
 }

@@ -20,7 +20,8 @@ public class EliminarEmpleadoServlet extends HttpServlet {
         }
         EmpleadoBusiness business = new EmpleadoBusiness();
         try {
-            business.eliminarEmpleado(Integer.parseInt(request.getParameter("id")));
+            long id = Long.parseLong(request.getParameter("id"));
+            business.eliminarEmpleadoJpa(id);
             request.setAttribute("msj", "Empleado eliminado correctamente");
             response.sendRedirect(Routes.EMPLEADO.getRoute());
         } catch (Exception e) {

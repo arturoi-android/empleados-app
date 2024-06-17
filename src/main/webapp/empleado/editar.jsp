@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: eduzuniga
-  Date: 2024-04-30
-  Time: 11:09 p.m.
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.ez.sisemp.empleado.entity.EmpleadoEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -12,10 +6,7 @@
 <head>
     <title>Empleado Dashboard</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../styles/dashboard.min.css" rel="stylesheet">
 </head>
@@ -23,21 +14,17 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-text mx-3">Sistema Empleados</div>
         </a>
-
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="empleado">
+            <a class="nav-link" href="">
                 <span>Dashboard</span></a>
         </li>
         <!-- Divider -->
@@ -63,10 +50,8 @@
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
         <!-- Main Content -->
         <div id="content">
-
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 <!-- Topbar Navbar -->
@@ -79,7 +64,6 @@
                                 Hola! ${sessionScope.user.primerNombre()}
                             </span>
                             <img class="img-profile rounded-circle" src=${sessionScope.user.fotoPerfilBase64()} style="width:65" alt="profile photo">
-
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -96,7 +80,6 @@
                 </ul>
             </nav>
             <!-- Fin Topbar -->
-
             <!-- Inicio Page Content -->
             <div class="container-fluid">
                 <div class="row">
@@ -109,33 +92,34 @@
                                     </div>
                                     <div class="card-body">
                                         <form action="editar" method="post">
+                                            <input type="hidden" name="id" value="${empleado.id}">
                                             <div class="form-group">
                                                 <label for="nombres">Nombres</label>
-                                                <input type="text" name="nombres" class="form-control" id="nombres"  >
+                                                <input type="text" name="nombres" class="form-control" id="nombres" value="${empleado.nombres}" >
                                             </div>
                                             <div class="form-group">
                                                 <label for="apellidoPat">Apellido Paterno</label>
-                                                <input type="text" name="apellidoPat" class="form-control" id="apellidoPat"  ">
+                                                <input type="text" name="apellidoPat" class="form-control" id="apellidoPat" value="${empleado.apellidoPat}" >
                                             </div>
                                             <div class="form-group">
                                                 <label for="apellidoMat">Apellido Materno</label>
-                                                <input type="text" name="apellidoMat" class="form-control" id="apellidoMat"  >
+                                                <input type="text" name="apellidoMat" class="form-control" id="apellidoMat" value="${empleado.apellidoMat}" >
                                             </div>
                                             <div class="form-group">
                                                 <label for="idDepartamento">Departamento</label>
-                                                <input type="text" name="idDepartamento" class="form-control" id="idDepartamento"  >
+                                                <input type="text" name="idDepartamento" class="form-control" id="idDepartamento" value="${empleado.idDepartamento}" >
                                             </div>
                                             <div class="form-group">
                                                 <label for="correo">Correo</label>
-                                                <input type="email" name="correo" class="form-control" id="correo"  placeholder="Ingresa un correo valido">
+                                                <input type="email" name="correo" class="form-control" id="correo" value="${empleado.correo}" placeholder="Ingresa un correo valido">
                                             </div>
                                             <div class="form-group">
                                                 <label for="salario">Salario</label>
-                                                <input type="number" name="salario" class="form-control" id="salario" >
+                                                <input type="number" name="salario" class="form-control" id="salario" value="${empleado.salario}" >
                                             </div>
                                             <div class="form-group">
                                                 <label for="fechaNacimiento">Fecha Nacimiento:</label>
-                                                <input type="text" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+                                                <input type="text" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="${empleado.fechaNacimiento}">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Editar</button>
                                         </form>
@@ -144,11 +128,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
 
@@ -161,10 +143,8 @@
             </div>
         </footer>
         <!-- End of Footer -->
-
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
 
@@ -174,8 +154,7 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -211,5 +190,4 @@
 <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-
 </html>

@@ -15,8 +15,8 @@
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
 
-    <!-- Custom styles for this template-->
     <link href="../styles/dashboard.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
@@ -56,11 +56,9 @@
         <!-- Main Content -->
         <div id="content">
 
-            <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - User Information -->
+
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -85,8 +83,13 @@
                 </ul>
             </nav>
             <!-- Fin Topbar -->
+            <button onclick="logout()" href="../login/login.jsp">Cerrar</button>
+            <script>
+                function logout() {
+                    window.location.href = '<%= request.getContextPath() %>/admin?action=logout';
+                }
+            </script>
 
-            <!-- Inicio Page Content -->
             <div class="container-fluid">
 
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -117,19 +120,19 @@
                         <tbody>
                         <c:forEach var="usuario" items="${usuarios}">
                             <tr>
-                                <td>${usuario.id()}</td>
-                                <td>${usuario.nombreUsuario()}</td>
-                                <td>${usuario.contrasena()}</td>
-                                <td>${usuario.utlimaConexion()}</td>
-                                <td>${usuario.estado()}</td>
-                                <td>${usuario.primerNombre()}</td>
-                                <td>${usuario.apellidoPat()}</td>
-                                <td>${usuario.rol()}</td>
-                                <td> <img src="${usuario.urlFoto()}" alt="url_foto" style="width: 3rem;height: 3rem"> </td>
+                                <td>${usuario.getId()}</td>
+                                <td>${usuario.getNombreUsuario()}</td>
+                                <td>${usuario.getContrasena()}</td>
+                                <td>${usuario.getUltimaConexion()}</td>
+                                <td>${usuario.getActive()}</td>
+                                <td>${usuario.getPrimerNombre()}</td>
+                                <td>${usuario.getApellidoPat()}</td>
+                                <td>${usuario.getRol()}</td>
+                                <td> <img src="${usuario.getFotoPerfil()}" alt="url_foto" style="width: 3rem;height: 3rem"> </td>
                                 <td>
-                                    <a href="usuario/editar?id=${usuario.id()}">Editar</a>
+                                    <a href="usuario/editar?id=${usuario.getId()}">Editar</a>
                                     <form action="usuario/eliminar" method="post" style="display:inline;">
-                                        <input type="hidden" name="id" value="${usuario.id()}">
+                                        <input type="hidden" name="id" value="${usuario.getId()}">
                                         <input type="submit" value="Eliminar" style="background:none;border:none;color:blue;">
                                     </form>
                                 </td>

@@ -1,6 +1,7 @@
 package com.ez.sisemp.empleado.servlet;
 
 import com.ez.sisemp.empleado.business.EmpleadoBusiness;
+import com.ez.sisemp.empleado.entity.EmpleadoDashboardEntity;
 import com.ez.sisemp.empleado.model.Empleado;
 import com.ez.sisemp.empleado.model.EmpleadoDashboard;
 import com.ez.sisemp.shared.utils.SessionUtils;
@@ -21,12 +22,24 @@ public class EmpleadoServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0); // Prox
+
+        String action = request.getParameter("action");
+        if ("logout".equals(action)) {
+            if (!SessionUtils.cerrarSesion(request, response)) {
+                return;
+            } else {
+                return;
+            }
+        }
         if (!SessionUtils.validarSesion(request, response)) {
             return;
         }
         EmpleadoBusiness business = new EmpleadoBusiness();
         try {
-            EmpleadoDashboard dashboard = business.obtenerDatosDashboard();
+            EmpleadoDashboardEntity dashboard = business.obtenerDatosDashboard();
             request.setAttribute("dashboard", dashboard);
 //            List<Empleado> empleados = business.obtenerEmpleados();
             var empleados = business.obtenerEmpleadosJpa();

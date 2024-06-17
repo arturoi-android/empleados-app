@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         UsuarioBusiness business = new UsuarioBusiness();
         try {
-            Usuario usuario = business.login(request.getParameter("username"), request.getParameter("password"));
+            Usuario usuario = business.loginJPA(request.getParameter("username"), request.getParameter("password"));
             HttpSession session = request.getSession();
             session.setAttribute("user", usuario);
             if (usuario.rolId() == Roles.ADMIN.getId()) {

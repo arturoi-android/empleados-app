@@ -76,7 +76,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600">
-                                Hola! ${sessionScope.user.primerNombre()}
+                            <c:out value="${usuario.primerNombre}" />
                             </span>
                             <img class="img-profile rounded-circle" src=${sessionScope.user.fotoPerfilBase64()} style="width:65" alt="profile photo">
 
@@ -96,7 +96,12 @@
                 </ul>
             </nav>
             <!-- Fin Topbar -->
-
+            <button onclick="logout()" href="../login/login.jsp">Cerrar</button>
+            <script>
+                function logout() {
+                    window.location.href = '<%= request.getContextPath() %>/admin?action=logout';
+                }
+            </script>
             <!-- Inicio Page Content -->
             <div class="container-fluid">
 
@@ -120,7 +125,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Total Empleados</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${dashboard.totalEmpleados()}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${dashboard.totalEmpleados}</div>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +140,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Mayor salario</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${dashboard.mayorSalario()}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${dashboard.mayorSalario}</div>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +157,7 @@
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${dashboard.promedioEdad()}</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${dashboard.promedioEdad}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +174,7 @@
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                             Numero departamentos</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${dashboard.totalDepartamentos()}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${dashboard.totalDepartamentos}</div>
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +194,7 @@
                             <th scope="col">Correo</th>
                             <th scope="col">Edad</th>
                             <th scope="col">Salario</th>
+                            <th scope="col">Activo</th>
                             <th scope="col">Acciones</th>
                         </tr>
                         </thead>
@@ -203,6 +209,8 @@
                                 <td>${empleado.correo()}</td>
                                 <td>${empleado.edad()}</td>
                                 <td>${empleado.salario()}</td>
+                                <td>${empleado.Activo()}</td>
+
                                 <td>
                                     <a href="empleado/editar?id=${empleado.id()}">Editar</a>
                                     <form action="empleado/eliminar" method="post" style="display:inline;">
